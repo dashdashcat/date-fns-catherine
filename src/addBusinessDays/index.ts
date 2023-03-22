@@ -30,33 +30,8 @@ export default function addBusinessDays<DateType extends Date>(
 
   if (isNaN(amount)) return constructFrom(dirtyDate, NaN)
 
-  const hours = date.getHours()
-  const sign = amount < 0 ? -1 : 1
-  const fullWeeks = Math.trunc(amount / 5)
-
-  date.setDate(date.getDate() + fullWeeks * 7)
-
-  // Get remaining days not part of a full week
-  let restDays = Math.abs(amount % 5)
-
-  // Loops over remaining days
-  while (restDays > 0) {
-    date.setDate(date.getDate() + sign)
-    if (!isWeekend(date)) restDays -= 1
-  }
-
-  // If the date is a weekend day and we reduce a dividable of
-  // 5 from it, we land on a weekend date.
-  // To counter this, we add days accordingly to land on the next business day
-  if (startedOnWeekend && isWeekend(date) && amount !== 0) {
-    // If we're reducing days, we want to add days until we land on a weekday
-    // If we're adding days we want to reduce days until we land on a weekday
-    if (isSaturday(date)) date.setDate(date.getDate() + (sign < 0 ? 2 : -1))
-    if (isSunday(date)) date.setDate(date.getDate() + (sign < 0 ? 1 : -2))
-  }
-
-  // Restore hours to avoid DST lag
-  date.setHours(hours)
+  // Oops! The rest is gone :)
+  // Implement the rest of this function. Use the helper functions you have available in this library and make all tests pass
 
   return date
 }
